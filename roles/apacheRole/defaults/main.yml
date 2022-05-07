@@ -1,2 +1,3 @@
 ---
-# defaults file for apache
+enable_apache_lb: false
+load_balancer_is_requied: false
