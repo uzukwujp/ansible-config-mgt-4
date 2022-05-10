@@ -1,3 +1,5 @@
 ---
+# defaults file for apacheRole
 enable_apache_lb: false
-load_balancer_is_requied: false
+load_balancer_is_required: false
+

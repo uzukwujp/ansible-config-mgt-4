@@ -1,12 +1,15 @@
 ---
-# tasks file for ansible-nginx-load-balancer
-- include: debian.yml
-  when: ansible_os_family == "Debian"
 
-- include: ssl.yml
-  when: >
-        (nginx_load_balancer_ssl is defined and
-        nginx_load_balancer_ssl != []) and
-        nginx_load_balancer_ssl['enabled']
+- name: Install nginx
+  become: yes
+  yum:
+    name: nginx
+    state: present
 
-- include: config.yml
+
+
+- name: start nginx
+  become: yes
+  service:
+    name: nginx
+    state: started
