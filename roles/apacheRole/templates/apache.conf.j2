@@ -1,12 +1,10 @@
 <VirtualHost *:80>
-	ServerAdmin webmaster@localhost
-	DocumentRoot /var/www/html
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+
         <Proxy "balancer://mycluster">
                 
-                BalancerMember http://web1:80 loadfactor=5 timeout=1
-                BalancerMember http://web2:80 loadfactor=5 timeout=1
+                BalancerMember http://{{web1}}:80/index.php loadfactor=5 timeout=1
+                BalancerMember http://{{web2}}:80/index.php loadfactor=5 timeout=1
                ProxySet lbmethod=bytraffic
                # ProxySet lbmethod=byrequests
         </Proxy>

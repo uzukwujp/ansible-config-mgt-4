@@ -13,3 +13,14 @@
   service:
     name: nginx
     state: started
+
+- name: Copy configuration file
+  become: yes
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf.j2
+    owner: root
+    group: root
+    mode: 0664
+  notify: Restart nginx service
+

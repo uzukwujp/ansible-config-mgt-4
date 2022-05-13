@@ -1,8 +1,6 @@
 ---
-# handlers file for apacheRole
-
-- name: Restart apache2 service
-  become: yes
-  service:
-    name: apache2
-    state: restarted
+    - name: Restart apache2 service
+      become: yes
+      service:
+        name: apache2
+        state: restarted
