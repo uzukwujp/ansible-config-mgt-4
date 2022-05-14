@@ -1,5 +1,5 @@
 [lb]
-172.31.17.147 ansible_ssh_user='ec2-user'
+172.31.19.97 ansible_ssh_user='ubuntu'
 
 
 [webservers]

@@ -17,6 +17,7 @@
   become_user: root
   tasks:
     - name: delete wireshark
+      when: ansible_os_family == "Ubuntu"
       apt:
         name: wireshark-qt
         state: absent
