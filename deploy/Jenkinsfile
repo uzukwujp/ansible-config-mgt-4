@@ -1,0 +1,42 @@
+pipeline {
+
+    angent any 
+
+    parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    } string(name: 'branch', defaultValue: 'main', description: 'This is the git branch the pipeline is ran on')
+
+    environment {
+       local_roles_path = '/var/lib/jenkins/workspace/ansible-config-mgt-4_'+"${branch}"+'/roles'
+    }
+    
+    stages {
+        stage('checkout code from git'){
+            steps {
+                git branch: "${branch}", url: 'https://github.com/uzukwujp/ansible-config-mgt-4.git'
+            }
+        }
+
+
+        stage('update ansible config file'){
+            steps {
+                 sh ('sudo sed -i -e "/roles_path = \\/[a-z]*\\/*/a\\roles_path = $local_roles_path" -e "/roles_path = \\/[a-z]*\\/*/d" /etc/ansible/ansible.cfg')
+            }
+        }
+
+        stage('run the playbook'){
+            steps {
+                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
+            
+            }
+        }
+
+        stage('clean up') {
+            steps {
+                cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
+            }
+        }
+    }
+
+
+}
