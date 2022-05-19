@@ -3,8 +3,11 @@ pipeline {
     agent any 
 
     parameters {
+
       string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
-    } string(name: 'branch', defaultValue: 'main', description: 'This is the git branch the pipeline is ran on')
+      string(name: 'branch', defaultValue: 'main', description: 'This is the git branch the pipeline is ran on')
+
+    }
 
     environment {
        local_roles_path = '/var/lib/jenkins/workspace/ansible-config-mgt-4_'+"${branch}"+'/roles'
