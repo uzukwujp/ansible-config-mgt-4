@@ -1,45 +1,46 @@
 pipeline {
-
-    agent any 
-
-    parameters {
-
-      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
-      string(name: 'branch', defaultValue: 'main', description: 'This is the git branch the pipeline is ran on')
-
-    }
+    agent any
 
     environment {
-       local_roles_path = '/var/lib/jenkins/workspace/ansible-config-mgt-4_'+"${branch}"+'/roles'
-    }
-    
+        ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
+            }
+
+    parameters {
+        string (name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+        }
+
     stages {
-        stage('checkout code from git'){
+        stage("Initial cleanup") {
             steps {
-                git branch: "${branch}", url: 'https://github.com/uzukwujp/ansible-config-mgt-4.git'
+                dir("${WORKSPACE}") {
+                deleteDir()
+                    }
+                }
+            }
+
+        stage ('Checkout SCM') {
+            steps{
+                git branch: 'main', url: 'https://github.com/royalt1234/ansible-config-mgt.git'
             }
         }
 
-
-        stage('update ansible config file'){
+        stage ('Prepare Ansible For Execution') {
             steps {
-                 sh ('sudo sed -i -e "/roles_path = \\/[a-z]*\\/*/a\\roles_path = $local_roles_path" -e "/roles_path = \\/[a-z]*\\/*/d" /etc/ansible/ansible.cfg')
+            sh 'echo ${WORKSPACE}' 
+            sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
             }
         }
 
-        stage('run the playbook'){
+        stage ('Run Ansible playbook') {
             steps {
-                ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
-            
+            ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
             }
         }
 
-        stage('clean up') {
+        stage ('Clean Workspace after build') {
             steps {
-                cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
+            cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
             }
         }
     }
-
-
 }
