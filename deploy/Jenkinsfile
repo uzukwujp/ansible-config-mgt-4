@@ -20,7 +20,7 @@ pipeline {
 
         stage ('Checkout SCM') {
             steps{
-                git branch: 'main', url: 'https://github.com/royalt1234/ansible-config-mgt.git'
+                git branch: 'main', url: 'https://github.com/uzukwujp/ansible-config-mgt-4.git'
             }
         }
 
@@ -33,7 +33,7 @@ pipeline {
 
         stage ('Run Ansible playbook') {
             steps {
-            ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
+            ansiblePlaybook become: true, colorized: true, credentialsId: 'jenkins-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
             }
         }
 
