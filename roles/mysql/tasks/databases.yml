@@ -6,3 +6,15 @@
     encoding: "{{ item.encoding | default('utf8') }}"
     state: "{{ item.state | default('present') }}"
   with_items: "{{ mysql_databases }}"
+
+- name: Copy tooling app database table
+  copy:
+    src: "{{ tooling_database_location }}"
+    dest: /home/
+    mode: 0777
+
+- name: Dump tooling app database table
+  mysql_db:
+    name: tooling
+    state: import
+    target: /home/tooling-db.sql

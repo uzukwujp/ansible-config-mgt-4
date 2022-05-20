@@ -1,0 +1,4 @@
+---
+- hosts: artifactory
+  roles:
+    - artifactory

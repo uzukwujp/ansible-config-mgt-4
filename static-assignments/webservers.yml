@@ -1,4 +1,4 @@
 ---
-- hosts: webservers
+- hosts: tooling
   roles:
     - webserver
