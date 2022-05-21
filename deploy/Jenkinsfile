@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string (name: 'inventory', defaultValue: 'dev.yml',  description: 'This is the inventory file for the environment to deploy configuration')
+        string (name: 'env', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
         }
 
     environment {
@@ -35,7 +35,7 @@ pipeline {
 
         stage ('Run Ansible playbook') {
             steps {
-            ansiblePlaybook become: true, colorized: true, credentialsId: 'jenkins-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml'
+            ansiblePlaybook become: true, colorized: true, credentialsId: 'jenkins-private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${env}', playbook: 'playbooks/site.yml'
             }
         }
 
