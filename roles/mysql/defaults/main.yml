@@ -108,18 +108,31 @@ mysql_config_include_files: []
 # Databases.
 mysql_databases:
   - name: tooling
-# collation: utf8_general_ci
-# encoding: utf8
-# replicate: 1
+    collation: utf8_general_ci
+    encoding: utf8
+    replicate: 1
+
+
+    mysql_databases:
+      - name: homestead
+        collation: utf8_general_ci
+        encoding: utf8
+        replicate: 1
 
 # Users.
 mysql_users:
   - name: webaccess
     host: "%"
     password: admin
-    priv: "tooling.*:ALL"
+    priv: "tooling.*:ALL,GRANT"
 
-tooling_database_location: "/home/ubuntu/app/tooling/tooling-db.sql"
+mysql_users:
+  - name: homestead
+    host: 172.31.19.80
+    password: sePret^i
+    priv: "homestead.*:ALL,GRANT"
+
+
 
 # Replication settings (replication is only enabled if master/user have values).
 mysql_server_id: "1"

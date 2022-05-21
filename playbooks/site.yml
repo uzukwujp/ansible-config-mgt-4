@@ -6,8 +6,8 @@
   tags:
     - always
 
-- name: tooling
-  import_playbook: ../static-assignments/webservers.yml
+#- name: tooling
+#  import_playbook: ../static-assignments/webservers.yml
 
 - name: Loadbalancers assignment
   import_playbook: ../static-assignments/loadbalancers.yml
@@ -15,6 +15,5 @@
 
 - name: install mysql database
   import_playbook: ../static-assignments/database.yml
-
-- name: install artifactory
-  import_playbook: ../static-assignments/artifactory.yml
+#- name: install artifactory
+#  import_playbook: ../static-assignments/artifactory.yml

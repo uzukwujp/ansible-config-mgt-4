@@ -1,21 +1,16 @@
 
 
 
-[tooling]
-172.31.18.209 ansible_ssh_user='ec2-user'
+
 
 [todo]
 <Todo-Web-Server-Private-IP-Address>
 
 [nginx]
-172.31.30.216 ansible_ssh_user='ubuntu'
+172.31.26.199 ansible_ssh_user='ec2-user'
 
-[db:vars]
-ansible_user=ec2-user
-ansible_python_interpreter=/usr/bin/python
+
 
 [db]
-172.31.17.106 
+172.31.27.169 ansible_ssh_user='ubuntu'
 
-[artifactory]
-172.31.23.112 ansible_ssh_user='ubuntu'
