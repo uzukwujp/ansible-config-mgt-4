@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string (name: 'env', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+        string (name: 'env', defaultValue: 'dev.yml',  description: 'This is the inventory file for the environment to deploy configuration')
         }
 
     environment {
