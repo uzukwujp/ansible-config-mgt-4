@@ -8,4 +8,4 @@
 <SonarQube-Private-IP-Address>
 
 [artifactory]
-172.31.24.6 ansible_ssh_user='ec2-user'
+172.31.82.85 ansible_ssh_user='ec2-user'
