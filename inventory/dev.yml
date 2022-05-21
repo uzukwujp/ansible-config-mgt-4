@@ -12,5 +12,5 @@
 
 
 [db]
-172.31.27.169 ansible_ssh_user='ubuntu'
+172.31.17.148 ansible_ssh_user='ubuntu'
 
