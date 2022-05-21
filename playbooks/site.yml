@@ -9,9 +9,9 @@
 #- name: tooling
 #  import_playbook: ../static-assignments/webservers.yml
 
-- name: Loadbalancers assignment
-  import_playbook: ../static-assignments/loadbalancers.yml
-  when: load_balancer_is_required
+#- name: Loadbalancers assignment
+#import_playbook: ../static-assignments/loadbalancers.yml
+#when: load_balancer_is_required
 #- name: install mysql database
 #import_playbook: ../static-assignments/database.yml
 #- name: install artifactory
