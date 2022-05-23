@@ -1,12 +1,13 @@
 ---
-#- name: tooling
-#  import_playbook: ../static-assignments/webservers.yml
+#- name: Loadbalancers assignment
+#  import_playbook: ../static-assignments/loadbalancers.yml
 
-- name: Loadbalancers assignment
-  import_playbook: ../static-assignments/loadbalancers.yml
+#- name: install mysql database
+#  import_playbook: ../static-assignments/database.yml
 
-- name: install mysql database
-  import_playbook: ../static-assignments/database.yml
+#- name: install artifactory
+#  import_playbook: ../static-assignments/artifactory.yml
 
-- name: install artifactory
-  import_playbook: ../static-assignments/artifactory.yml
+- hosts: todo
+  name: Deploy the todo application
+  ansible.builtin.import_playbook: ../static-assignments/deployment.yml

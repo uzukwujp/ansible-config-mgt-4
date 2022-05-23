@@ -4,7 +4,7 @@
 
 
 [todo]
-<Todo-Web-Server-Private-IP-Address>
+172.31.25.9 ansible_ssh_user='ec2-user  '
 
 [nginx]
 172.31.26.199 ansible_ssh_user='ec2-user'
